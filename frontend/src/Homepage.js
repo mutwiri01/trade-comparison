@@ -29,7 +29,7 @@ const HomePage = () => {
       setIsLoading(true); // Disable the button while fetching data
 
       const response = await axios.get(
-        "http://localhost:5000/compare",
+        "https://trade-comparison.onrender.com/compare",
         {
           params: { country1, country2, indicator1, indicator2 },
         }
