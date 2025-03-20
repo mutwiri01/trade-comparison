@@ -18,19 +18,22 @@ const HomePage = () => {
   const [indicator2, setIndicator2] = useState("Inflation Rate");
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Add loading state
 
   // List of indicators supported by Trading Economics
-  const indicators = [
-    "GDP",
-    "Inflation Rate",
-  ];
+  const indicators = ["GDP", "Inflation Rate"];
 
   const fetchData = async () => {
     try {
       setError("");
-      const response = await axios.get("https://trade-comparison.onrender.com/compare", {
-        params: { country1, country2, indicator1, indicator2 },
-      });
+      setIsLoading(true); // Disable the button while fetching data
+
+      const response = await axios.get(
+        "http://localhost:5000/compare",
+        {
+          params: { country1, country2, indicator1, indicator2 },
+        }
+      );
 
       console.log("API Response:", response.data);
 
@@ -58,6 +61,8 @@ const HomePage = () => {
     } catch (error) {
       console.error("Error fetching data:", error);
       setError(error.response?.data?.error || "Something went wrong!");
+    } finally {
+      setIsLoading(false); // Re-enable the button after fetching data
     }
   };
 
@@ -65,7 +70,9 @@ const HomePage = () => {
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white p-5">
       {/* Hero Section */}
       <header className="text-center py-10">
-        <h1 className="text-4xl font-bold">Trading Economics Comparison by Mutwiri Kithinji</h1>
+        <h1 className="text-4xl font-bold">
+          Trading Economics Comparison by Mutwiri Kithinji
+        </h1>
         <p className="text-lg text-gray-600 dark:text-gray-400">
           Compare economic indicators between countries with real-time data.
         </p>
@@ -140,9 +147,10 @@ const HomePage = () => {
         {/* Fetch Data Button */}
         <button
           onClick={fetchData}
-          className="w-full mt-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-md"
+          disabled={isLoading} // Disable the button while loading
+          className="w-full mt-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-md disabled:opacity-50"
         >
-          Compare
+          {isLoading ? "Fetching Data..." : "Compare"}
         </button>
       </div>
 
