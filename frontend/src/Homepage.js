@@ -28,7 +28,7 @@ const HomePage = () => {
   const fetchData = async () => {
     try {
       setError("");
-      const response = await axios.get("http://localhost:5000/compare", {
+      const response = await axios.get("https://trade-comparison.onrender.com/compare", {
         params: { country1, country2, indicator1, indicator2 },
       });
 
