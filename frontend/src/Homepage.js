@@ -91,7 +91,6 @@ const HomePage = () => {
             >
               <option>Sweden</option>
               <option>Mexico</option>
-              <option>New Zealand</option>
               <option>Thailand</option>
             </select>
           </div>
@@ -106,7 +105,6 @@ const HomePage = () => {
             >
               <option>Sweden</option>
               <option>Mexico</option>
-              <option>New Zealand</option>
               <option>Thailand</option>
             </select>
           </div>

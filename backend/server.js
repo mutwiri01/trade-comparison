@@ -43,7 +43,7 @@ app.get("/compare", async (req, res) => {
     ) {
       return res.status(400).json({
         error:
-          "Only Sweden, Mexico, New Zealand, and Thailand are allowed for free users.",
+          "Only Sweden, Mexico,  and Thailand are allowed for free users.",
       });
     }
 
