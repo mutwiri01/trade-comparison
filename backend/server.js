@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const API_KEY = process.env.API_KEY; // Store API key in .env file
+const API_KEY = process.env.API_KEY; 
 
 // Allowed free countries
 const FREE_COUNTRIES = ["Sweden", "Mexico", "New Zealand", "Thailand"];
@@ -30,13 +30,13 @@ app.get("/compare", async (req, res) => {
   try {
     let { country1, country2, indicator1, indicator2 } = req.query;
 
-    // Ensure country names are capitalized correctly
+    
     country1 =
       country1.charAt(0).toUpperCase() + country1.slice(1).toLowerCase();
     country2 =
       country2.charAt(0).toUpperCase() + country2.slice(1).toLowerCase();
 
-    // Validate that only free countries are used
+    
     if (
       !FREE_COUNTRIES.includes(country1) ||
       !FREE_COUNTRIES.includes(country2)
@@ -55,7 +55,7 @@ app.get("/compare", async (req, res) => {
     const url2 = `https://api.tradingeconomics.com/historical/country/${country2}/indicator/${indicator2}?c=${API_KEY}`;
     const country2Data = await fetchWithDelay(url2);
 
-    // Sort data by date in descending order (most recent first)
+    
     const sortedCountry1Data = country1Data.sort((a, b) => {
       return new Date(b.DateTime) - new Date(a.DateTime);
     });
@@ -64,7 +64,7 @@ app.get("/compare", async (req, res) => {
       return new Date(b.DateTime) - new Date(a.DateTime);
     });
 
-    // Send the sorted data back to the frontend
+    
     res.json({ country1: sortedCountry1Data, country2: sortedCountry2Data });
   } catch (error) {
     console.error("Error fetching data from Trading Economics API:", error);

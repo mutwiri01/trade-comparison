@@ -18,7 +18,7 @@ const HomePage = () => {
   const [indicator2, setIndicator2] = useState("Inflation Rate");
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false); // Add loading state
+  const [isLoading, setIsLoading] = useState(false); //  loading state
 
   // List of indicators supported by Trading Economics
   const indicators = ["GDP", "Inflation Rate"];
@@ -37,7 +37,7 @@ const HomePage = () => {
 
       console.log("API Response:", response.data);
 
-      // Ensure both country data are arrays
+      
       const country1Data = Array.isArray(response.data.country1)
         ? response.data.country1
         : [];
@@ -45,11 +45,11 @@ const HomePage = () => {
         ? response.data.country2
         : [];
 
-      // Merge data based on the date (assuming date format is consistent)
+      
       const mergedData = country1Data.map((item, index) => ({
-        date: item.DateTime.split("T")[0], // Extract only the date part
-        [indicator1]: item.Value, // Use Value instead of value
-        [indicator2]: country2Data[index]?.Value || "N/A", // Use Value instead of value
+        date: item.DateTime.split("T")[0], 
+        [indicator1]: item.Value, 
+        [indicator2]: country2Data[index]?.Value || "N/A", 
       }));
 
       // Sort mergedData by date in descending order (most recent first)
