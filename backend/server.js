@@ -10,7 +10,7 @@ app.use(express.json());
 const API_KEY = process.env.API_KEY; 
 
 // Allowed free countries
-const FREE_COUNTRIES = ["Sweden", "Mexico", "New Zealand", "Thailand"];
+const FREE_COUNTRIES = ["Sweden", "Mexico", "Thailand"];
 
 app.get("/", (req, res) => {
   res.send("Server is running!");
